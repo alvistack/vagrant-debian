@@ -24,7 +24,7 @@
       "boot_wait": "10s",
       "cpus": 2,
       "disk_size": 131072,
-      "guest_os_type": "Ubuntu_64",
+      "guest_os_type": "Debian_64",
       "headless": true,
       "http_directory": "./",
       "iso_checksum": "sha256:b317d87b0a3d5b568f48a92dcabfc4bc51fe58d9f67ca13b013f1b8329d1306d",
