@@ -1,0 +1,80 @@
+{
+  "builders": [
+    {
+      "accelerator": "kvm",
+      "boot_command": [
+        "<esc><esc><esc><esc><esc><esc><esc><esc><esc><esc>",
+        "<esc><esc><esc><esc><esc><esc><esc><esc><esc><esc>",
+        "<esc><esc><esc><esc><esc><esc><esc><esc><esc><esc>",
+        "<esc><esc><esc><esc><esc><esc><esc><esc><esc><esc>",
+        "<esc><esc><esc><esc><esc><esc><esc><esc><esc><esc>",
+        "<esc><esc><esc><esc><esc><esc><esc><esc><esc><esc>",
+        "<esc><esc><esc><esc><esc><esc><esc><esc><esc><esc>",
+        "<esc><esc><esc><esc><esc><esc><esc><esc><esc><esc>",
+        "<esc><esc><esc><esc><esc><esc><esc><esc><esc><esc>",
+        "<esc><esc><esc><esc><esc><esc><esc><esc><esc><esc>",
+        "/install.amd/vmlinuz<wait> ",
+        "initrd=/install.amd/initrd.gz<wait> ",
+        "fb=false<wait> ",
+        "auto=true<wait> ",
+        "priority=critical<wait> ",
+        "net.ifnames=0 biosdevname=0<wait> ",
+        "preseed/url=http://{{.HTTPIP}}:{{.HTTPPort}}/preseed.cfg<wait> ",
+        " --- <enter>"
+      ],
+      "boot_wait": "10s",
+      "cpus": 2,
+      "disk_cache": "writeback",
+      "disk_compression": true,
+      "disk_image": false,
+      "disk_interface": "virtio",
+      "disk_size": 131072,
+      "format": "qcow2",
+      "headless": true,
+      "http_directory": "./",
+      "iso_checksum": "sha256:b317d87b0a3d5b568f48a92dcabfc4bc51fe58d9f67ca13b013f1b8329d1306d",
+      "iso_url": "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-10.7.0-amd64-netinst.iso",
+      "memory": 4096,
+      "net_device": "virtio-net",
+      "qemu_binary": "kvm",
+      "ssh_password": "vagrant",
+      "ssh_port": 22,
+      "ssh_timeout": "3600s",
+      "ssh_username": "vagrant",
+      "type": "qemu"
+    }
+  ],
+  "post-processors": [
+    {
+      "inline": [
+        "set -eu",
+        "export _IMAGE=\"output-qemu/packer-qemu\"",
+        "sudo qemu-img convert -f qcow2 -O qcow2 \"$_IMAGE\" \"$_IMAGE.convert\"",
+        "sudo rm -rf \"$_IMAGE\"",
+        "sudo chmod a+r /boot/vmlinuz*",
+        "sudo virt-sysprep --operations defaults,-ssh-userdir,-customize -a \"$_IMAGE.convert\"",
+        "sudo virt-sparsify --in-place \"$_IMAGE.convert\"",
+        "sudo qemu-img convert -f qcow2 -O qcow2 -c \"$_IMAGE.convert\" \"$_IMAGE\"",
+        "sudo rm -rf \"$_IMAGE.convert\""
+      ],
+      "type": "shell-local"
+    },
+    {
+      "compression_level": 9,
+      "keep_input_artifact": true,
+      "output": "output-vagrant/package.box",
+      "provider_override": "libvirt",
+      "type": "vagrant"
+    }
+  ],
+  "provisioners": [
+    {
+      "galaxy_file": "./ansible-galaxy-requirements.yml",
+      "inventory_directory": "./",
+      "playbook_file": "./packer.yml",
+      "type": "ansible",
+      "user": "vagrant"
+    }
+  ]
+}
+
