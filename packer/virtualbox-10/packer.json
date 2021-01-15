@@ -62,6 +62,17 @@
   ],
   "provisioners": [
     {
+      "inline": [
+        "set -eu",
+        "export _CDROM=\"$(mktemp -d)\"",
+        "sudo mount -o loop /home/vagrant/VBoxGuestAdditions.iso $_CDROM",
+        "sudo sh $_CDROM/VBoxLinuxAdditions.run",
+        "sudo umount $_CDROM",
+        "rm -rf $_CDROM"
+      ],
+      "type": "shell"
+    },
+    {
       "galaxy_file": "./ansible-galaxy-requirements.yml",
       "inventory_directory": "./",
       "playbook_file": "./packer.yml",
