@@ -64,11 +64,11 @@
     {
       "inline": [
         "set -eu",
-        "export _CDROM=\"$(mktemp -d)\"",
-        "sudo mount -o loop /home/vagrant/VBoxGuestAdditions.iso $_CDROM",
-        "sudo sh $_CDROM/VBoxLinuxAdditions.run",
-        "sudo umount $_CDROM",
-        "rm -rf $_CDROM"
+        "export _ISO=\"$(mktemp -d)\"",
+        "sudo mount -o loop /home/vagrant/VBoxGuestAdditions.iso $_ISO",
+        "sudo sh $_ISO/VBoxLinuxAdditions.run",
+        "sudo umount $_ISO",
+        "rm -rf $_ISO"
       ],
       "type": "shell"
     },
