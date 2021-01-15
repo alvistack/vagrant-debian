@@ -67,19 +67,6 @@
       "playbook_file": "./packer.yml",
       "type": "ansible",
       "user": "vagrant"
-    },
-    {
-      "inline": [
-        "set -eu",
-        "sudo apt-get update",
-        "sudo apt-get dist-upgrade -y",
-        "export _ISO=\"$(mktemp -d)\"",
-        "sudo mount -o loop /home/vagrant/VBoxGuestAdditions.iso $_ISO",
-        "sudo sh $_ISO/VBoxLinuxAdditions.run || echo $?",
-        "sudo umount $_ISO",
-        "rm -rf $_ISO /home/vagrant/VBoxGuestAdditions.iso"
-      ],
-      "type": "shell"
     }
   ]
 }
