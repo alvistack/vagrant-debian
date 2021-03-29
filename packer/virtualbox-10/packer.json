@@ -60,6 +60,14 @@
       "output": "output-vagrant/package.box",
       "provider_override": "virtualbox",
       "type": "vagrant"
+    },
+    {
+      "checksum_types": [
+        "sha256"
+      ],
+      "keep_input_artifact": true,
+      "output": "output-vagrant/package.box.{{ .ChecksumType }}",
+      "type": "checksum"
     }
   ],
   "provisioners": [
