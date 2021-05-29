@@ -19,7 +19,7 @@
         "priority=critical<wait> ",
         "net.ifnames=0 biosdevname=0<wait> ",
         "preseed/url=http://{{.HTTPIP}}:{{.HTTPPort}}/preseed.cfg<wait> ",
-        " --- <enter>"
+        "---<enter>"
       ],
       "boot_wait": "10s",
       "cpus": 2,
