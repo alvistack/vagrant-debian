@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+  - Initialize with `verify.yml` with first start
   - Upgrade minimal Ansible support to 4.0.0
 
 ## 20210313.1.1 - 2021-03-13
