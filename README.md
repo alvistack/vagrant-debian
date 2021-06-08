@@ -11,6 +11,9 @@ Learn more about Debian: <https://debian.org/>
 
 ## Supported Boxes and Respective Packer Template Links
 
+  - [`alvistack/debian-11`](https://app.vagrantup.com/alvistack/boxes/debian-11)
+      - [`packer/libvirt-11/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/libvirt-11/packer.json)
+      - [`packer/virtualbox-11/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/virtualbox-11/packer.json)
   - [`alvistack/debian-10`](https://app.vagrantup.com/alvistack/boxes/debian-10)
       - [`packer/libvirt-10/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/libvirt-10/packer.json)
       - [`packer/virtualbox-10/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/virtualbox-10/packer.json)

@@ -6,6 +6,8 @@
 
 ## 20210602.1.1 - 2021-06-02
 
+  - Support Debian 11
+
 ### Major Changes
 
   - Initialize with `verify.yml` with first start
