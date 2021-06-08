@@ -37,7 +37,7 @@
       "http_directory": "./",
       "iso_checksum": "bb09a738bf722573125b4f532932cc07c13f3165222c2e4238dde4a3ee74c5ec",
       "iso_url": "http://cdimage.debian.org/cdimage/bullseye_di_rc1/amd64/iso-cd/debian-bullseye-DI-rc1-amd64-netinst.iso",
-      "memory": 4096,
+      "memory": 8192,
       "net_device": "virtio-net",
       "qemu_binary": "kvm",
       "shutdown_command": "sudo shutdown -h now",
