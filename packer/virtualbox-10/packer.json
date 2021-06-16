@@ -31,7 +31,7 @@
       "headless": true,
       "http_directory": "./",
       "iso_checksum": "8660593d10de0ce7577c9de4dab886ff540bc9843659c8879d8eea0ab224c109",
-      "iso_url": "http://ftp.osuosl.org/pub/debian-cdimage/10.9.0/amd64/iso-cd/debian-10.9.0-amd64-netinst.iso",
+      "iso_url": "http://cdimage.debian.org/cdimage/release/10.9.0/amd64/iso-cd/debian-10.9.0-amd64-netinst.iso",
       "memory": 8192,
       "shutdown_command": "sudo shutdown -h now",
       "ssh_password": "vagrant",
