@@ -31,7 +31,7 @@
       "headless": true,
       "http_directory": "./",
       "iso_checksum": "3cdec5aa9865a768434e4ad2b9fba0e8ca82fc297ceb4137518c53045d5d4af8",
-      "iso_url": "http://laotzu.ftp.acc.umu.se/cdimage/archive/10.12.0/amd64/iso-cd/debian-10.12.0-amd64-netinst.iso",
+      "iso_url": "http://chuangtzu.ftp.acc.umu.se/cdimage/archive/10.12.0/amd64/iso-cd/debian-10.12.0-amd64-netinst.iso",
       "memory": 16384,
       "shutdown_command": "sudo shutdown -h now",
       "ssh_password": "vagrant",
