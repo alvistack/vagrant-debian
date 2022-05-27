@@ -5,7 +5,7 @@
 [![GitLab pipeline status](https://img.shields.io/gitlab/pipeline/alvistack/vagrant-debian/master)](https://gitlab.com/alvistack/vagrant-debian/-/pipelines)
 [![GitHub tag](https://img.shields.io/github/tag/alvistack/vagrant-debian.svg)](https://github.com/alvistack/vagrant-debian/tags)
 [![GitHub license](https://img.shields.io/github/license/alvistack/vagrant-debian.svg)](https://github.com/alvistack/vagrant-debian/blob/master/LICENSE)
-[![Vagrant Box download](https://img.shields.io/badge/dynamic/json?label=alvistack%2Fdebian-10&query=%24.boxes%5B%3A1%5D.downloads&url=https%3A%2F%2Fapp.vagrantup.com%2Fapi%2Fv1%2Fsearch%3Fq%3Dalvistack%2Fdebian-10)](https://app.vagrantup.com/alvistack/boxes/debian-10)
+[![Vagrant Box download](https://img.shields.io/badge/dynamic/json?label=alvistack%2Fdebian-11&query=%24.boxes%5B%3A1%5D.downloads&url=https%3A%2F%2Fapp.vagrantup.com%2Fapi%2Fv1%2Fsearch%3Fq%3Dalvistack%2Fdebian-11)](https://app.vagrantup.com/alvistack/boxes/debian-11)
 
 Debian is an operating system which is composed primarily of free and open-source software, most of which is under the GNU General Public License, and developed by a group of individuals known as the Debian project. Debian is one of the most popular Linux distributions for personal computers and network servers, and has been used as a base for several other Linux distributions.
 
@@ -40,7 +40,7 @@ Learn more about Debian: <https://debian.org/>
 Once you have [Vagrant](https://www.vagrantup.com/docs/installation) and [VirtaulBox](https://www.virtualbox.org/) installed, run the following commands under your [project directory](https://learn.hashicorp.com/tutorials/vagrant/getting-started-project-setup?in=vagrant/getting-started):
 
     # Initialize Vagrant
-    vagrant init alvistack/debian-10
+    vagrant init alvistack/debian-11
     
     # Start the virtual machine
     vagrant up
@@ -50,6 +50,15 @@ Once you have [Vagrant](https://www.vagrantup.com/docs/installation) and [Virtau
     
     # Terminate the virtual machine
     vagrant destroy --force
+
+### Molecule
+
+You could also run our [Molecule](https://molecule.readthedocs.io/en/stable/) test cases if you have [Vagrant](https://www.vagrantup.com/) and [Libvirt](https://libvirt.org/) installed, e.g.
+
+    # Run Molecule on Debian 11
+    molecule converge -s libvirt-11
+
+Please refer to [.gitlab-ci.yml](.gitlab-ci.yml) for more information on running Molecule.
 
 ## Versioning
 
