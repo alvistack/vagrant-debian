@@ -104,25 +104,22 @@
 .script-packer-build: &script-packer-build
   - |
     sudo -E vagrant cloud auth login --token $VAGRANT_CLOUD_TOKEN
-    cd $CI_PROJECT_DIR/packer/$_PACKER_BUILDER_PROVIDER-$_PACKER_BUILDER_VERSION
+    cd $CI_PROJECT_DIR/packer/$_BOX-$_PROVIDER
     sudo -E packer build packer.json
 
 .script-vagrant-box-add: &script-vagrant-box-add
   - |
     export _ORG="$CI_PROJECT_NAMESPACE"
-    export _BOX="$(echo $CI_PROJECT_NAME | sed "s/^vagrant-//g")-$_PACKER_BUILDER_VERSION"
-    export _PROVIDER="$_PACKER_BUILDER_PROVIDER"
     sudo -E umount /home/vagrant/.vagrant.d/boxes
     sudo -E vagrant box add \
       --name $_ORG/$_BOX \
       --provider $_PROVIDER \
-      $CI_PROJECT_DIR/packer/$_PACKER_BUILDER_PROVIDER-$_PACKER_BUILDER_VERSION/output-vagrant/package.box
+      $CI_PROJECT_DIR/packer/$_BOX-$_PROVIDER/output-vagrant/package.box
 
 .script-molecule-test: &script-molecule-test
   - |
-    export VAGRANT_EXPERIMENTAL="1"
     export _MOLECULE_INSTANCE_NAME="$(pwgen -1AB 12)"
-    sudo -E molecule test -s $_PACKER_BUILDER_PROVIDER-$_PACKER_BUILDER_VERSION
+    sudo -E molecule test -s $_BOX-$_PROVIDER
 
 .script-vagrant-cloud-provider-upload: &script-vagrant-cloud-provider-upload
   - |
@@ -134,10 +131,8 @@
       exit 0
     fi
     sudo -E vagrant cloud auth login --token $VAGRANT_CLOUD_TOKEN
-    cd $CI_PROJECT_DIR/packer/$_PACKER_BUILDER_PROVIDER-$_PACKER_BUILDER_VERSION
+    cd $CI_PROJECT_DIR/packer/$_BOX-$_PROVIDER
     export _ORG="$CI_PROJECT_NAMESPACE"
-    export _BOX="$(echo $CI_PROJECT_NAME | sed "s/^vagrant-//g")-$_PACKER_BUILDER_VERSION"
-    export _PROVIDER="$_PACKER_BUILDER_PROVIDER"
     export _CHECKSUM="$(sha256sum output-vagrant/package.box | awk '{ print $1 }')"
     curl -skL \
       --header "Content-Type: application/json" \
@@ -183,7 +178,7 @@
     - *script-linters
     - *script-packer-build
 
-.job-molecule: &job-molecule
+.job-molecule-test: &job-molecule-test
   script:
     - *script-bootstrap-python
     - *script-bootstrap-ansible
@@ -200,240 +195,240 @@
     - *script-vagrant-cloud-provider-upload
 
 default:
-  retry: 2
   before_script:
     - *script-git-submodule
+  retry: 2
 
-build:libvirt-testing:
+build:debian-testing-libvirt:
   <<: *job-packer-build
   stage: build
   cache:
-    key: "$CI_PIPELINE_ID-libvirt-testing"
+    key: "$CI_PIPELINE_ID-debian-testing-libvirt"
     paths:
       - packer/*/output-vagrant
   variables:
-    _PACKER_BUILDER_PROVIDER: "libvirt"
-    _PACKER_BUILDER_VERSION: "testing"
+    _BOX: "debian-testing"
+    _PROVIDER: "libvirt"
 
-test:libvirt-testing:
-  <<: *job-molecule
+test:debian-testing-libvirt:
+  <<: *job-molecule-test
   stage: test
   cache:
-    key: "$CI_PIPELINE_ID-libvirt-testing"
+    key: "$CI_PIPELINE_ID-debian-testing-libvirt"
     paths:
       - packer/*/output-vagrant
     policy: pull
   variables:
-    _PACKER_BUILDER_PROVIDER: "libvirt"
-    _PACKER_BUILDER_VERSION: "testing"
+    _BOX: "debian-testing"
+    _PROVIDER: "libvirt"
   needs:
-    - build:libvirt-testing
+    - build:debian-testing-libvirt
 
-deploy:libvirt-testing:
+deploy:debian-testing-libvirt:
   <<: *job-vagrant-cloud-provider-upload
   stage: deploy
   cache:
-    key: "$CI_PIPELINE_ID-libvirt-testing"
+    key: "$CI_PIPELINE_ID-debian-testing-libvirt"
     paths:
       - packer/*/output-vagrant
     policy: pull
   variables:
-    _PACKER_BUILDER_PROVIDER: "libvirt"
-    _PACKER_BUILDER_VERSION: "testing"
+    _BOX: "debian-testing"
+    _PROVIDER: "libvirt"
   needs:
-    - test:libvirt-testing
+    - test:debian-testing-libvirt
 
-build:libvirt-11:
+build:debian-testing-virtualbox:
   <<: *job-packer-build
   stage: build
   cache:
-    key: "$CI_PIPELINE_ID-libvirt-11"
+    key: "$CI_PIPELINE_ID-debian-testing-virtualbox"
     paths:
       - packer/*/output-vagrant
   variables:
-    _PACKER_BUILDER_PROVIDER: "libvirt"
-    _PACKER_BUILDER_VERSION: "11"
+    _BOX: "debian-testing"
+    _PROVIDER: "virtualbox"
 
-test:libvirt-11:
-  <<: *job-molecule
+test:debian-testing-virtualbox:
+  <<: *job-molecule-test
   stage: test
   cache:
-    key: "$CI_PIPELINE_ID-libvirt-11"
+    key: "$CI_PIPELINE_ID-debian-testing-virtualbox"
     paths:
       - packer/*/output-vagrant
     policy: pull
   variables:
-    _PACKER_BUILDER_PROVIDER: "libvirt"
-    _PACKER_BUILDER_VERSION: "11"
+    _BOX: "debian-testing"
+    _PROVIDER: "virtualbox"
   needs:
-    - build:libvirt-11
+    - build:debian-testing-virtualbox
 
-deploy:libvirt-11:
+deploy:debian-testing-virtualbox:
   <<: *job-vagrant-cloud-provider-upload
   stage: deploy
   cache:
-    key: "$CI_PIPELINE_ID-libvirt-11"
+    key: "$CI_PIPELINE_ID-debian-testing-virtualbox"
     paths:
       - packer/*/output-vagrant
     policy: pull
   variables:
-    _PACKER_BUILDER_PROVIDER: "libvirt"
-    _PACKER_BUILDER_VERSION: "11"
+    _BOX: "debian-testing"
+    _PROVIDER: "virtualbox"
   needs:
-    - test:libvirt-11
+    - test:debian-testing-virtualbox
 
-build:libvirt-10:
+build:debian-11-libvirt:
   <<: *job-packer-build
   stage: build
   cache:
-    key: "$CI_PIPELINE_ID-libvirt-10"
+    key: "$CI_PIPELINE_ID-debian-11-libvirt"
     paths:
       - packer/*/output-vagrant
   variables:
-    _PACKER_BUILDER_PROVIDER: "libvirt"
-    _PACKER_BUILDER_VERSION: "10"
+    _BOX: "debian-11"
+    _PROVIDER: "libvirt"
 
-test:libvirt-10:
-  <<: *job-molecule
+test:debian-11-libvirt:
+  <<: *job-molecule-test
   stage: test
   cache:
-    key: "$CI_PIPELINE_ID-libvirt-10"
+    key: "$CI_PIPELINE_ID-debian-11-libvirt"
     paths:
       - packer/*/output-vagrant
     policy: pull
   variables:
-    _PACKER_BUILDER_PROVIDER: "libvirt"
-    _PACKER_BUILDER_VERSION: "10"
+    _BOX: "debian-11"
+    _PROVIDER: "libvirt"
   needs:
-    - build:libvirt-10
+    - build:debian-11-libvirt
 
-deploy:libvirt-10:
+deploy:debian-11-libvirt:
   <<: *job-vagrant-cloud-provider-upload
   stage: deploy
   cache:
-    key: "$CI_PIPELINE_ID-libvirt-10"
+    key: "$CI_PIPELINE_ID-debian-11-libvirt"
     paths:
       - packer/*/output-vagrant
     policy: pull
   variables:
-    _PACKER_BUILDER_PROVIDER: "libvirt"
-    _PACKER_BUILDER_VERSION: "10"
+    _BOX: "debian-11"
+    _PROVIDER: "libvirt"
   needs:
-    - test:libvirt-10
+    - test:debian-11-libvirt
 
-build:virtualbox-testing:
+build:debian-11-virtualbox:
   <<: *job-packer-build
   stage: build
   cache:
-    key: "$CI_PIPELINE_ID-virtualbox-testing"
+    key: "$CI_PIPELINE_ID-debian-11-virtualbox"
     paths:
       - packer/*/output-vagrant
   variables:
-    _PACKER_BUILDER_PROVIDER: "virtualbox"
-    _PACKER_BUILDER_VERSION: "testing"
+    _BOX: "debian-11"
+    _PROVIDER: "virtualbox"
 
-test:virtualbox-testing:
-  <<: *job-molecule
+test:debian-11-virtualbox:
+  <<: *job-molecule-test
   stage: test
   cache:
-    key: "$CI_PIPELINE_ID-virtualbox-testing"
+    key: "$CI_PIPELINE_ID-debian-11-virtualbox"
     paths:
       - packer/*/output-vagrant
     policy: pull
   variables:
-    _PACKER_BUILDER_PROVIDER: "virtualbox"
-    _PACKER_BUILDER_VERSION: "testing"
+    _BOX: "debian-11"
+    _PROVIDER: "virtualbox"
   needs:
-    - build:virtualbox-testing
+    - build:debian-11-virtualbox
 
-deploy:virtualbox-testing:
+deploy:debian-11-virtualbox:
   <<: *job-vagrant-cloud-provider-upload
   stage: deploy
   cache:
-    key: "$CI_PIPELINE_ID-virtualbox-testing"
+    key: "$CI_PIPELINE_ID-debian-11-virtualbox"
     paths:
       - packer/*/output-vagrant
     policy: pull
   variables:
-    _PACKER_BUILDER_PROVIDER: "virtualbox"
-    _PACKER_BUILDER_VERSION: "testing"
+    _BOX: "debian-11"
+    _PROVIDER: "virtualbox"
   needs:
-    - test:virtualbox-testing
+    - test:debian-11-virtualbox
 
-build:virtualbox-11:
+build:debian-10-libvirt:
   <<: *job-packer-build
   stage: build
   cache:
-    key: "$CI_PIPELINE_ID-virtualbox-11"
+    key: "$CI_PIPELINE_ID-debian-10-libvirt"
     paths:
       - packer/*/output-vagrant
   variables:
-    _PACKER_BUILDER_PROVIDER: "virtualbox"
-    _PACKER_BUILDER_VERSION: "11"
+    _BOX: "debian-10"
+    _PROVIDER: "libvirt"
 
-test:virtualbox-11:
-  <<: *job-molecule
+test:debian-10-libvirt:
+  <<: *job-molecule-test
   stage: test
   cache:
-    key: "$CI_PIPELINE_ID-virtualbox-11"
+    key: "$CI_PIPELINE_ID-debian-10-libvirt"
     paths:
       - packer/*/output-vagrant
     policy: pull
   variables:
-    _PACKER_BUILDER_PROVIDER: "virtualbox"
-    _PACKER_BUILDER_VERSION: "11"
+    _BOX: "debian-10"
+    _PROVIDER: "libvirt"
   needs:
-    - build:virtualbox-11
+    - build:debian-10-libvirt
 
-deploy:virtualbox-11:
+deploy:debian-10-libvirt:
   <<: *job-vagrant-cloud-provider-upload
   stage: deploy
   cache:
-    key: "$CI_PIPELINE_ID-virtualbox-11"
+    key: "$CI_PIPELINE_ID-debian-10-libvirt"
     paths:
       - packer/*/output-vagrant
     policy: pull
   variables:
-    _PACKER_BUILDER_PROVIDER: "virtualbox"
-    _PACKER_BUILDER_VERSION: "11"
+    _BOX: "debian-10"
+    _PROVIDER: "libvirt"
   needs:
-    - test:virtualbox-11
+    - test:debian-10-libvirt
 
-build:virtualbox-10:
+build:debian-10-virtualbox:
   <<: *job-packer-build
   stage: build
   cache:
-    key: "$CI_PIPELINE_ID-virtualbox-10"
+    key: "$CI_PIPELINE_ID-debian-10-virtualbox"
     paths:
       - packer/*/output-vagrant
   variables:
-    _PACKER_BUILDER_PROVIDER: "virtualbox"
-    _PACKER_BUILDER_VERSION: "10"
+    _BOX: "debian-10"
+    _PROVIDER: "virtualbox"
 
-test:virtualbox-10:
-  <<: *job-molecule
+test:debian-10-virtualbox:
+  <<: *job-molecule-test
   stage: test
   cache:
-    key: "$CI_PIPELINE_ID-virtualbox-10"
+    key: "$CI_PIPELINE_ID-debian-10-virtualbox"
     paths:
       - packer/*/output-vagrant
     policy: pull
   variables:
-    _PACKER_BUILDER_PROVIDER: "virtualbox"
-    _PACKER_BUILDER_VERSION: "10"
+    _BOX: "debian-10"
+    _PROVIDER: "virtualbox"
   needs:
-    - build:virtualbox-10
+    - build:debian-10-virtualbox
 
-deploy:virtualbox-10:
+deploy:debian-10-virtualbox:
   <<: *job-vagrant-cloud-provider-upload
   stage: deploy
   cache:
-    key: "$CI_PIPELINE_ID-virtualbox-10"
+    key: "$CI_PIPELINE_ID-debian-10-virtualbox"
     paths:
       - packer/*/output-vagrant
     policy: pull
   variables:
-    _PACKER_BUILDER_PROVIDER: "virtualbox"
-    _PACKER_BUILDER_VERSION: "10"
+    _BOX: "debian-10"
+    _PROVIDER: "virtualbox"
   needs:
-    - test:virtualbox-10
+    - test:debian-10-virtualbox
