@@ -14,14 +14,14 @@ Learn more about Debian: <https://debian.org/>
 ## Supported Boxes and Respective Packer Template Links
 
   - [`alvistack/debian-testing`](https://app.vagrantup.com/alvistack/boxes/debian-testing)
-      - [`packer/libvirt-testing/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/libvirt-testing/packer.json)
-      - [`packer/virtualbox-testing/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/virtualbox-testing/packer.json)
+      - [`packer/debian-testing-libvirt/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/debian-testing-libvirt/packer.json)
+      - [`packer/debian-testing-virtualbox/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/debian-testing-virtualbox/packer.json)
   - [`alvistack/debian-11`](https://app.vagrantup.com/alvistack/boxes/debian-11)
-      - [`packer/libvirt-11/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/libvirt-11/packer.json)
-      - [`packer/virtualbox-11/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/virtualbox-11/packer.json)
+      - [`packer/debian-11-libvirt/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/debian-11-libvirt/packer.json)
+      - [`packer/debian-11-virtualbox/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/debian-11-virtualbox/packer.json)
   - [`alvistack/debian-10`](https://app.vagrantup.com/alvistack/boxes/debian-10)
-      - [`packer/libvirt-10/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/libvirt-10/packer.json)
-      - [`packer/virtualbox-10/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/virtualbox-10/packer.json)
+      - [`packer/debian-10-libvirt/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/debian-10-libvirt/packer.json)
+      - [`packer/debian-10-virtualbox/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/debian-10-virtualbox/packer.json)
 
 ## Overview
 
@@ -56,7 +56,7 @@ Once you have [Vagrant](https://www.vagrantup.com/docs/installation) and [Virtau
 You could also run our [Molecule](https://molecule.readthedocs.io/en/stable/) test cases if you have [Vagrant](https://www.vagrantup.com/) and [Libvirt](https://libvirt.org/) installed, e.g.
 
     # Run Molecule on Debian 11
-    molecule converge -s libvirt-11
+    molecule converge -s debian-11-libvirt
 
 Please refer to [.gitlab-ci.yml](.gitlab-ci.yml) for more information on running Molecule.
 
