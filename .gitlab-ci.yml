@@ -248,6 +248,8 @@ build:debian-testing-virtualbox:
   variables:
     _BOX: "debian-testing"
     _PROVIDER: "virtualbox"
+  allow_failure: true
+  retry: 0
 
 test:debian-testing-virtualbox:
   <<: *job-molecule-test
@@ -262,6 +264,8 @@ test:debian-testing-virtualbox:
     _PROVIDER: "virtualbox"
   needs:
     - build:debian-testing-virtualbox
+  allow_failure: true
+  retry: 0
 
 deploy:debian-testing-virtualbox:
   <<: *job-vagrant-cloud-provider-upload
@@ -276,6 +280,8 @@ deploy:debian-testing-virtualbox:
     _PROVIDER: "virtualbox"
   needs:
     - test:debian-testing-virtualbox
+  allow_failure: true
+  retry: 0
 
 build:debian-11-libvirt:
   <<: *job-packer-build
@@ -326,6 +332,8 @@ build:debian-11-virtualbox:
   variables:
     _BOX: "debian-11"
     _PROVIDER: "virtualbox"
+  allow_failure: true
+  retry: 0
 
 test:debian-11-virtualbox:
   <<: *job-molecule-test
@@ -340,6 +348,8 @@ test:debian-11-virtualbox:
     _PROVIDER: "virtualbox"
   needs:
     - build:debian-11-virtualbox
+  allow_failure: true
+  retry: 0
 
 deploy:debian-11-virtualbox:
   <<: *job-vagrant-cloud-provider-upload
@@ -354,6 +364,8 @@ deploy:debian-11-virtualbox:
     _PROVIDER: "virtualbox"
   needs:
     - test:debian-11-virtualbox
+  allow_failure: true
+  retry: 0
 
 build:debian-10-libvirt:
   <<: *job-packer-build
@@ -404,6 +416,8 @@ build:debian-10-virtualbox:
   variables:
     _BOX: "debian-10"
     _PROVIDER: "virtualbox"
+  allow_failure: true
+  retry: 0
 
 test:debian-10-virtualbox:
   <<: *job-molecule-test
@@ -418,6 +432,8 @@ test:debian-10-virtualbox:
     _PROVIDER: "virtualbox"
   needs:
     - build:debian-10-virtualbox
+  allow_failure: true
+  retry: 0
 
 deploy:debian-10-virtualbox:
   <<: *job-vagrant-cloud-provider-upload
@@ -432,3 +448,5 @@ deploy:debian-10-virtualbox:
     _PROVIDER: "virtualbox"
   needs:
     - test:debian-10-virtualbox
+  allow_failure: true
+  retry: 0
