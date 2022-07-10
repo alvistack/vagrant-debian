@@ -1,6 +1,6 @@
 # Vagrant Box Packaging for Debian
 
-<img src="/alvistack.svg" width="75" alt="AlviStack">
+<a href="https://alvistack.com" title="AlviStack" target="_blank"><img src="/alvistack.svg" height="75" alt="AlviStack"></a>
 
 [![GitLab pipeline status](https://img.shields.io/gitlab/pipeline/alvistack/vagrant-debian/master)](https://gitlab.com/alvistack/vagrant-debian/-/pipelines)
 [![GitHub tag](https://img.shields.io/github/tag/alvistack/vagrant-debian.svg)](https://github.com/alvistack/vagrant-debian/tags)
