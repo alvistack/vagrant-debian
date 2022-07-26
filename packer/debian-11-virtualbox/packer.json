@@ -31,7 +31,7 @@
       "headless": true,
       "http_directory": "./",
       "iso_checksum": "d490a35d36030592839f24e468a5b818c919943967012037d6ab3d65d030ef7f",
-      "iso_url": "http://chuangtzu.ftp.acc.umu.se/debian-cd/current/amd64/iso-cd/debian-11.4.0-amd64-netinst.iso",
+      "iso_url": "http://gemmei.ftp.acc.umu.se/debian-cd/current/amd64/iso-cd/debian-11.4.0-amd64-netinst.iso",
       "memory": 16384,
       "shutdown_command": "sudo shutdown -h now",
       "ssh_password": "vagrant",
