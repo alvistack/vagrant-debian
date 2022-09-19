@@ -15,7 +15,7 @@
 # limitations under the License.
 
 namespace: alvistack
-name: vagrant-debian
+name: debian
 description: Vagrant Box Packaging for Debian
 
 version: 0.0.0
