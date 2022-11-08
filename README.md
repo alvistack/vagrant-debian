@@ -13,27 +13,27 @@ Learn more about Debian: <https://debian.org/>
 
 ## Supported Boxes and Respective Packer Template Links
 
-  - [`alvistack/debian-testing`](https://app.vagrantup.com/alvistack/boxes/debian-testing)
-      - [`packer/debian-testing-libvirt/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/debian-testing-libvirt/packer.json)
-      - [`packer/debian-testing-virtualbox/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/debian-testing-virtualbox/packer.json)
-  - [`alvistack/debian-11`](https://app.vagrantup.com/alvistack/boxes/debian-11)
-      - [`packer/debian-11-libvirt/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/debian-11-libvirt/packer.json)
-      - [`packer/debian-11-virtualbox/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/debian-11-virtualbox/packer.json)
-  - [`alvistack/debian-10`](https://app.vagrantup.com/alvistack/boxes/debian-10)
-      - [`packer/debian-10-libvirt/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/debian-10-libvirt/packer.json)
-      - [`packer/debian-10-virtualbox/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/debian-10-virtualbox/packer.json)
+-   [`alvistack/debian-testing`](https://app.vagrantup.com/alvistack/boxes/debian-testing)
+    -   [`packer/debian-testing-libvirt/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/debian-testing-libvirt/packer.json)
+    -   [`packer/debian-testing-virtualbox/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/debian-testing-virtualbox/packer.json)
+-   [`alvistack/debian-11`](https://app.vagrantup.com/alvistack/boxes/debian-11)
+    -   [`packer/debian-11-libvirt/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/debian-11-libvirt/packer.json)
+    -   [`packer/debian-11-virtualbox/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/debian-11-virtualbox/packer.json)
+-   [`alvistack/debian-10`](https://app.vagrantup.com/alvistack/boxes/debian-10)
+    -   [`packer/debian-10-libvirt/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/debian-10-libvirt/packer.json)
+    -   [`packer/debian-10-virtualbox/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/debian-10-virtualbox/packer.json)
 
 ## Overview
 
-  - Packaging with [Packer](https://www.packer.io/)
-  - Minimal [Vagrant base box implementation](https://www.vagrantup.com/docs/boxes/base)
-  - Support [QEMU Guest Agent](https://wiki.qemu.org/Features/GuestAgent)
-  - Support [VirtualBox Guest Additions](https://www.virtualbox.org/manual/ch04.html)
-  - Support [Vagrant synced folder with rsync](https://www.vagrantup.com/docs/synced-folders/rsync)
-  - Support [Vagrant provisioner with Ansible](https://www.vagrantup.com/docs/provisioning/ansible)
-  - Standardize disk partition with GPT
-  - Standardize file system mount with UUID
-  - Standardize network interface with `eth0`
+-   Packaging with [Packer](https://www.packer.io/)
+-   Minimal [Vagrant base box implementation](https://www.vagrantup.com/docs/boxes/base)
+-   Support [QEMU Guest Agent](https://wiki.qemu.org/Features/GuestAgent)
+-   Support [VirtualBox Guest Additions](https://www.virtualbox.org/manual/ch04.html)
+-   Support [Vagrant synced folder with rsync](https://www.vagrantup.com/docs/synced-folders/rsync)
+-   Support [Vagrant provisioner with Ansible](https://www.vagrantup.com/docs/provisioning/ansible)
+-   Standardize disk partition with GPT
+-   Standardize file system mount with UUID
+-   Standardize network interface with `eth0`
 
 ### Quick Start
 
@@ -41,13 +41,13 @@ Once you have [Vagrant](https://www.vagrantup.com/docs/installation) and [Virtau
 
     # Initialize Vagrant
     vagrant init alvistack/debian-11
-    
+
     # Start the virtual machine
     vagrant up
-    
+
     # SSH into this machine
     vagrant ssh
-    
+
     # Terminate the virtual machine
     vagrant destroy --force
 
@@ -72,11 +72,11 @@ Version tags ended with `.0.0` are rolling release rebuild by [GitLab pipeline](
 
 ## License
 
-  - Code released under [Apache License 2.0](LICENSE)
-  - Docs released under [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/)
+-   Code released under [Apache License 2.0](LICENSE)
+-   Docs released under [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/)
 
 ## Author Information
 
-  - Wong Hoi Sing Edison
-      - <https://twitter.com/hswong3i>
-      - <https://github.com/hswong3i>
+-   Wong Hoi Sing Edison
+    -   <https://twitter.com/hswong3i>
+    -   <https://github.com/hswong3i>
