@@ -18,7 +18,7 @@ namespace: alvistack
 name: debian
 description: Vagrant Box Packaging for Debian
 
-version: 0.0.0
+version: 1.0.0
 readme: README.md
 license:
   - Apache-2.0
