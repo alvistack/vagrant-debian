@@ -249,7 +249,7 @@ build:debian-testing-virtualbox:
     _BOX: "debian-testing"
     _PROVIDER: "virtualbox"
   needs:
-    - build:debian-testing-libvirt
+    - deploy:debian-testing-libvirt
 
 test:debian-testing-virtualbox:
   <<: *job-molecule-test
@@ -329,7 +329,7 @@ build:debian-11-virtualbox:
     _BOX: "debian-11"
     _PROVIDER: "virtualbox"
   needs:
-    - build:debian-11-libvirt
+    - deploy:debian-11-libvirt
 
 test:debian-11-virtualbox:
   <<: *job-molecule-test
@@ -409,7 +409,7 @@ build:debian-10-virtualbox:
     _BOX: "debian-10"
     _PROVIDER: "virtualbox"
   needs:
-    - build:debian-10-libvirt
+    - deploy:debian-10-libvirt
 
 test:debian-10-virtualbox:
   <<: *job-molecule-test
