@@ -248,7 +248,8 @@ build:debian-testing-virtualbox:
   variables:
     _BOX: "debian-testing"
     _PROVIDER: "virtualbox"
-  retry: 0
+  needs:
+    - build:debian-testing-libvirt
 
 test:debian-testing-virtualbox:
   <<: *job-molecule-test
@@ -327,7 +328,8 @@ build:debian-11-virtualbox:
   variables:
     _BOX: "debian-11"
     _PROVIDER: "virtualbox"
-  retry: 0
+  needs:
+    - build:debian-11-libvirt
 
 test:debian-11-virtualbox:
   <<: *job-molecule-test
@@ -406,7 +408,8 @@ build:debian-10-virtualbox:
   variables:
     _BOX: "debian-10"
     _PROVIDER: "virtualbox"
-  retry: 0
+  needs:
+    - build:debian-10-libvirt
 
 test:debian-10-virtualbox:
   <<: *job-molecule-test
