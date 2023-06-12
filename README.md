@@ -9,7 +9,7 @@ tag](https://img.shields.io/github/tag/alvistack/vagrant-debian.svg)](https://gi
 [![GitHub
 license](https://img.shields.io/github/license/alvistack/vagrant-debian.svg)](https://github.com/alvistack/vagrant-debian/blob/master/LICENSE)
 [![Vagrant Box
-download](https://img.shields.io/badge/dynamic/json?label=alvistack%2Fdebian-11&query=%24.boxes%5B%3A1%5D.downloads&url=https%3A%2F%2Fapp.vagrantup.com%2Fapi%2Fv1%2Fsearch%3Fq%3Dalvistack%2Fdebian-11)](https://app.vagrantup.com/alvistack/boxes/debian-11)
+download](https://img.shields.io/badge/dynamic/json?label=alvistack%2Fdebian-12&query=%24.boxes%5B%3A1%5D.downloads&url=https%3A%2F%2Fapp.vagrantup.com%2Fapi%2Fv1%2Fsearch%3Fq%3Dalvistack%2Fdebian-12)](https://app.vagrantup.com/alvistack/boxes/debian-12)
 
 Debian is an operating system which is composed primarily of free and
 open-source software, most of which is under the GNU General Public
@@ -25,6 +25,9 @@ Learn more about Debian: <https://debian.org/>
 -   [`alvistack/debian-testing`](https://app.vagrantup.com/alvistack/boxes/debian-testing)
     -   [`packer/debian-testing-libvirt/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/debian-testing-libvirt/packer.json)
     -   [`packer/debian-testing-virtualbox/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/debian-testing-virtualbox/packer.json)
+-   [`alvistack/debian-12`](https://app.vagrantup.com/alvistack/boxes/debian-12)
+    -   [`packer/debian-12-libvirt/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/debian-12-libvirt/packer.json)
+    -   [`packer/debian-12-virtualbox/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/debian-12-virtualbox/packer.json)
 -   [`alvistack/debian-11`](https://app.vagrantup.com/alvistack/boxes/debian-11)
     -   [`packer/debian-11-libvirt/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/debian-11-libvirt/packer.json)
     -   [`packer/debian-11-virtualbox/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/debian-11-virtualbox/packer.json)
@@ -57,7 +60,7 @@ commands under your [project
 directory](https://learn.hashicorp.com/tutorials/vagrant/getting-started-project-setup?in=vagrant/getting-started):
 
     # Initialize Vagrant
-    vagrant init alvistack/debian-11
+    vagrant init alvistack/debian-12
 
     # Start the virtual machine
     vagrant up
@@ -75,8 +78,8 @@ You could also run our
 have [Vagrant](https://www.vagrantup.com/) and
 [Libvirt](https://libvirt.org/) installed, e.g.
 
-    # Run Molecule on Debian 11
-    molecule converge -s debian-11-libvirt
+    # Run Molecule on Debian 12
+    molecule converge -s debian-12-libvirt
 
 Please refer to [.gitlab-ci.yml](.gitlab-ci.yml) for more information on
 running Molecule.

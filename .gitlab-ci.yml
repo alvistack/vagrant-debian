@@ -279,6 +279,86 @@ deploy:debian-testing-virtualbox:
   needs:
     - test:debian-testing-virtualbox
 
+build:debian-12-libvirt:
+  <<: *job-packer-build
+  stage: build
+  cache:
+    key: "$CI_PIPELINE_ID-debian-12-libvirt"
+    paths:
+      - packer/*/output-vagrant
+  variables:
+    _BOX: "debian-12"
+    _PROVIDER: "libvirt"
+
+test:debian-12-libvirt:
+  <<: *job-molecule-test
+  stage: test
+  cache:
+    key: "$CI_PIPELINE_ID-debian-12-libvirt"
+    paths:
+      - packer/*/output-vagrant
+    policy: pull
+  variables:
+    _BOX: "debian-12"
+    _PROVIDER: "libvirt"
+  needs:
+    - build:debian-12-libvirt
+
+deploy:debian-12-libvirt:
+  <<: *job-vagrant-cloud-provider-upload
+  stage: deploy
+  cache:
+    key: "$CI_PIPELINE_ID-debian-12-libvirt"
+    paths:
+      - packer/*/output-vagrant
+    policy: pull
+  variables:
+    _BOX: "debian-12"
+    _PROVIDER: "libvirt"
+  needs:
+    - test:debian-12-libvirt
+
+build:debian-12-virtualbox:
+  <<: *job-packer-build
+  stage: build
+  cache:
+    key: "$CI_PIPELINE_ID-debian-12-virtualbox"
+    paths:
+      - packer/*/output-vagrant
+  variables:
+    _BOX: "debian-12"
+    _PROVIDER: "virtualbox"
+  needs:
+    - build:debian-12-libvirt
+
+test:debian-12-virtualbox:
+  <<: *job-molecule-test
+  stage: test
+  cache:
+    key: "$CI_PIPELINE_ID-debian-12-virtualbox"
+    paths:
+      - packer/*/output-vagrant
+    policy: pull
+  variables:
+    _BOX: "debian-12"
+    _PROVIDER: "virtualbox"
+  needs:
+    - build:debian-12-virtualbox
+
+deploy:debian-12-virtualbox:
+  <<: *job-vagrant-cloud-provider-upload
+  stage: deploy
+  cache:
+    key: "$CI_PIPELINE_ID-debian-12-virtualbox"
+    paths:
+      - packer/*/output-vagrant
+    policy: pull
+  variables:
+    _BOX: "debian-12"
+    _PROVIDER: "virtualbox"
+  needs:
+    - test:debian-12-virtualbox
+
 build:debian-11-libvirt:
   <<: *job-packer-build
   stage: build

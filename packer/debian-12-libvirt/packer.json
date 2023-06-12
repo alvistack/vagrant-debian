@@ -1,6 +1,7 @@
 {
   "builders": [
     {
+      "accelerator": "kvm",
       "boot_command": [
         "<esc><esc><esc><esc><esc><esc><esc><esc><esc><esc><wait>",
         "<esc><esc><esc><esc><esc><esc><esc><esc><esc><esc><wait>",
@@ -26,51 +27,49 @@
       ],
       "boot_wait": "1s",
       "cpus": 2,
-      "disk_size": 131072,
-      "guest_os_type": "Debian_64",
+      "disk_cache": "writeback",
+      "disk_compression": true,
+      "disk_image": false,
+      "disk_interface": "virtio",
+      "disk_size": "131072M",
+      "format": "qcow2",
       "headless": true,
       "http_directory": "./",
-      "iso_checksum": "eb3f96fd607e4b67e80f4fc15670feb7d9db5be50f4ca8d0bf07008cb025766b",
-      "iso_url": "http://chuangtzu.ftp.acc.umu.se/cdimage/archive/11.7.0/amd64/iso-cd/debian-11.7.0-amd64-netinst.iso",
+      "iso_checksum": "3b0e9718e3653435f20d8c2124de6d363a51a1fd7f911b9ca0c6db6b3d30d53e",
+      "iso_url": "http://gemmei.ftp.acc.umu.se/debian-cd/current/amd64/iso-cd/debian-12.0.0-amd64-netinst.iso",
       "memory": 16384,
+      "net_device": "virtio-net",
+      "qemu_binary": "kvm",
+      "qemuargs": [
+        [
+          "-cpu",
+          "host"
+        ]
+      ],
       "shutdown_command": "sudo shutdown -h now",
       "ssh_password": "vagrant",
       "ssh_port": 22,
       "ssh_read_write_timeout": "600s",
       "ssh_timeout": "120m",
       "ssh_username": "vagrant",
-      "type": "virtualbox-iso",
-      "vboxmanage": [
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--cpu-profile",
-          "host"
-        ],
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--nat-localhostreachable1",
-          "on"
-        ]
-      ],
-      "vrdp_bind_address": "0.0.0.0",
-      "vrdp_port_max": 6000,
-      "vrdp_port_min": 5900
+      "type": "qemu",
+      "vnc_bind_address": "0.0.0.0",
+      "vnc_port_max": 6000,
+      "vnc_port_min": 5900
     }
   ],
   "post-processors": [
     {
       "inline": [
         "set -eu",
-        "export _IMAGE=\"$(ls -1d output-virtualbox-iso/packer-virtualbox-iso-*.vmdk)\"",
-        "sudo qemu-img convert -f vmdk -O qcow2 \"$_IMAGE\" \"$_IMAGE.convert\"",
+        "export _IMAGE=\"output-qemu/packer-qemu\"",
+        "sudo qemu-img convert -f qcow2 -O qcow2 \"$_IMAGE\" \"$_IMAGE.convert\"",
         "sudo rm -rf \"$_IMAGE\"",
         "sudo chmod a+r /boot/vmlinuz*",
         "sudo virt-customize -a \"$_IMAGE.convert\" --delete \"/var/lib/*/random-seed\" --delete \"/var/lib/wicked/*\" --firstboot-command \"/usr/local/bin/virt-sysprep-firstboot.sh\"",
         "sudo virt-sysprep --operations defaults,-ssh-userdir,-customize -a \"$_IMAGE.convert\"",
         "sudo virt-sparsify --in-place \"$_IMAGE.convert\"",
-        "sudo qemu-img convert -f qcow2 -O vmdk \"$_IMAGE.convert\" \"$_IMAGE\"",
+        "sudo qemu-img convert -f qcow2 -O qcow2 -c \"$_IMAGE.convert\" \"$_IMAGE\"",
         "sudo rm -rf \"$_IMAGE.convert\""
       ],
       "type": "shell-local"
@@ -79,7 +78,7 @@
       "compression_level": 9,
       "keep_input_artifact": true,
       "output": "output-vagrant/package.box",
-      "provider_override": "virtualbox",
+      "provider_override": "libvirt",
       "type": "vagrant"
     }
   ],
