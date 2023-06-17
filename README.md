@@ -31,9 +31,6 @@ Learn more about Debian: <https://debian.org/>
 -   [`alvistack/debian-11`](https://app.vagrantup.com/alvistack/boxes/debian-11)
     -   [`packer/debian-11-libvirt/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/debian-11-libvirt/packer.json)
     -   [`packer/debian-11-virtualbox/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/debian-11-virtualbox/packer.json)
--   [`alvistack/debian-10`](https://app.vagrantup.com/alvistack/boxes/debian-10)
-    -   [`packer/debian-10-libvirt/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/debian-10-libvirt/packer.json)
-    -   [`packer/debian-10-virtualbox/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/debian-10-virtualbox/packer.json)
 
 ## Overview
 

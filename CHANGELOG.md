@@ -4,6 +4,11 @@
 
 ### Major Changes
 
+## 20230617.1.1 - 2023-06-17
+
+### Major Changes
+
+-   Remove Debian 10 support
 -   Support Debian 12
 
 ## 20230512.1.1 - 2023-05-12
