@@ -35,8 +35,8 @@
       "format": "qcow2",
       "headless": true,
       "http_directory": "./",
-      "iso_checksum": "none",
-      "iso_url": "https://cdimage.debian.org/cdimage/weekly-builds/amd64/iso-cd/debian-testing-amd64-netinst.iso",
+      "iso_checksum": "9f181ae12b25840a508786b1756c6352a0e58484998669288c4eec2ab16b8559",
+      "iso_url": "http://gemmei.ftp.acc.umu.se/debian-cd/current/amd64/iso-cd/debian-12.1.0-amd64-netinst.iso",
       "memory": 16384,
       "net_device": "virtio-net",
       "qemu_binary": "kvm",
@@ -83,6 +83,16 @@
     }
   ],
   "provisioners": [
+    {
+      "inline": [
+        "set -eu",
+        "sudo sed -i 's/bookworm/testing/g' /etc/apt/sources.list || echo $?",
+        "sudo sed -i 's/bookworm/testing/g' /etc/apt/sources.list.d/debian.sources || echo $?",
+        "sudo apt-get update",
+        "sudo apt-get dist-upgrade -y"
+      ],
+      "type": "shell"
+    },
     {
       "galaxy_file": "./ansible-galaxy-requirements.yml",
       "inventory_directory": "./",
