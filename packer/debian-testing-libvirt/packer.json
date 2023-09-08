@@ -13,8 +13,8 @@
         "<esc><esc><esc><esc><esc><esc><esc><esc><esc><esc><wait>",
         "<esc><esc><esc><esc><esc><esc><esc><esc><esc><esc><wait>",
         "<esc><esc><esc><esc><esc><esc><esc><esc><esc><esc><wait>",
-        "/install.amd/vmlinuz <wait5>",
-        "initrd=/install.amd/initrd.gz <wait5>",
+        "c<wait5>",
+        "linux /install.amd/vmlinuz <wait5>",
         "fb=false <wait5>",
         "auto-install/enable=true <wait5>",
         "cdrom-checker/start=false <wait5>",
@@ -23,7 +23,9 @@
         "debconf/frontend=noninteractive <wait5>",
         "net.ifnames=0 biosdevname=0 systemd.unified_cgroup_hierarchy=0 <wait5>",
         "preseed/url=http://{{.HTTPIP}}:{{.HTTPPort}}/preseed.cfg <wait5>",
-        "---<enter>"
+        "---<enter><wait5>",
+        "initrd /install.amd/initrd.gz<enter><wait5>",
+        "boot<enter>"
       ],
       "boot_wait": "1s",
       "cpus": 2,
@@ -32,6 +34,7 @@
       "disk_image": false,
       "disk_interface": "virtio",
       "disk_size": "131072M",
+      "efi_boot": true,
       "format": "qcow2",
       "headless": true,
       "http_directory": "./",
@@ -92,4 +95,3 @@
     }
   ]
 }
-
