@@ -40,6 +40,7 @@
       "http_directory": "./",
       "iso_checksum": "none",
       "iso_url": "https://cdimage.debian.org/cdimage/weekly-builds/amd64/iso-cd/debian-testing-amd64-netinst.iso",
+      "machine_type": "q35",
       "memory": 16384,
       "net_device": "virtio-net",
       "qemu_binary": "kvm",
