@@ -13,8 +13,8 @@
         "<esc><esc><esc><esc><esc><esc><esc><esc><esc><esc><wait>",
         "<esc><esc><esc><esc><esc><esc><esc><esc><esc><esc><wait>",
         "<esc><esc><esc><esc><esc><esc><esc><esc><esc><esc><wait>",
-        "c<wait5>",
-        "linux /install.amd/vmlinuz <wait5>",
+        "/install.amd/vmlinuz <wait5>",
+        "initrd=/install.amd/initrd.gz <wait5>",
         "fb=false <wait5>",
         "auto-install/enable=true <wait5>",
         "cdrom-checker/start=false <wait5>",
@@ -23,9 +23,7 @@
         "debconf/frontend=noninteractive <wait5>",
         "net.ifnames=0 biosdevname=0 systemd.unified_cgroup_hierarchy=0 <wait5>",
         "preseed/url=http://{{.HTTPIP}}:{{.HTTPPort}}/preseed.cfg <wait5>",
-        "---<enter><wait5>",
-        "initrd /install.amd/initrd.gz<enter><wait5>",
-        "boot<enter>"
+        "---<enter>"
       ],
       "boot_wait": "1s",
       "cpus": 2,
@@ -34,13 +32,11 @@
       "disk_image": false,
       "disk_interface": "virtio",
       "disk_size": "131072M",
-      "efi_boot": true,
       "format": "qcow2",
       "headless": true,
       "http_directory": "./",
       "iso_checksum": "none",
       "iso_url": "https://cdimage.debian.org/cdimage/weekly-builds/amd64/iso-cd/debian-testing-amd64-netinst.iso",
-      "machine_type": "q35",
       "memory": 16384,
       "net_device": "virtio-net",
       "qemu_binary": "kvm",
@@ -96,3 +92,4 @@
     }
   ]
 }
+
