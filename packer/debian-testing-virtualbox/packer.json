@@ -92,7 +92,7 @@
         "set -eu",
         "sudo apt update",
         "sudo DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y",
-        "sudo DEBIAN_FRONTEND=noninteractive apt-get install -y ca-certificates curl gcc hostname iproute2 language-pack-en locales python3 sudo",
+        "sudo DEBIAN_FRONTEND=noninteractive apt-get install -y ca-certificates curl gcc hostname iproute2 locales locales-all python3 sudo",
         "sudo DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential dkms",
         "sudo mount /dev/sr1 /mnt",
         "(echo 'y' | sudo sh /mnt/VBoxLinuxAdditions.run) || echo $?",
