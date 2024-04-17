@@ -28,8 +28,6 @@
       "cpus": 2,
       "disk_size": 131072,
       "guest_additions_mode": "upload",
-      "guest_additions_sha256": "415557382c3e6113768c8ad40b0781afbbd29da8a165599187aac6fb4a641852",
-      "guest_additions_url": "http://www.virtualbox.org/download/testcase/VBoxGuestAdditions_7.0.97-162569.iso",
       "guest_os_type": "Debian_64",
       "headless": true,
       "http_directory": "./",
