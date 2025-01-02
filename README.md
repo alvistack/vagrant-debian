@@ -28,9 +28,6 @@ Learn more about Debian: <https://debian.org/>
 - [`alvistack/debian-12`](https://app.vagrantup.com/alvistack/boxes/debian-12)
   - [`packer/debian-12-libvirt/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/debian-12-libvirt/packer.json)
   - [`packer/debian-12-virtualbox/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/debian-12-virtualbox/packer.json)
-- [`alvistack/debian-11`](https://app.vagrantup.com/alvistack/boxes/debian-11)
-  - [`packer/debian-11-libvirt/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/debian-11-libvirt/packer.json)
-  - [`packer/debian-11-virtualbox/packer.json`](https://github.com/alvistack/vagrant-debian/blob/master/packer/debian-11-virtualbox/packer.json)
 
 ## Overview
 
