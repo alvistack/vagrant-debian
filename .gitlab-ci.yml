@@ -268,7 +268,7 @@ build:debian-testing-virtualbox:
     _PROVIDER: virtualbox
     _ARCHITECTURE: amd64
   needs:
-    - deploy:debian-testing-libvirt
+    - build:debian-testing-libvirt
 
 test:debian-testing-virtualbox:
   <<: *job-molecule-test
@@ -354,7 +354,7 @@ build:debian-12-virtualbox:
     _PROVIDER: virtualbox
     _ARCHITECTURE: amd64
   needs:
-    - deploy:debian-12-libvirt
+    - build:debian-12-libvirt
 
 test:debian-12-virtualbox:
   <<: *job-molecule-test
