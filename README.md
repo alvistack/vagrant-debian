@@ -49,7 +49,7 @@ Learn more about Debian: <https://debian.org/>
 ### Quick Start
 
 Once you have [Vagrant](https://www.vagrantup.com/docs/installation) and
-[VirtaulBox](https://www.virtualbox.org/) installed, run the following
+[VirtualBox](https://www.virtualbox.org/) installed, run the following
 commands under your [project
 directory](https://learn.hashicorp.com/tutorials/vagrant/getting-started-project-setup?in=vagrant/getting-started):
 
