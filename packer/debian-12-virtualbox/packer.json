@@ -96,16 +96,6 @@
     {
       "inline": [
         "set -eu",
-        "sudo rm -rf /etc/apt/sources.list*",
-        "sudo mkdir -p /etc/apt/sources.list.d",
-        "printf \"Components: main contrib non-free non-free-firmware\nEnabled: yes\nX-Repolib-Name: debian\nSigned-By: /usr/share/keyrings/debian-archive-keyring.gpg\nSuites: bookworm bookworm-updates\nTypes: deb\nURIs: http://deb.debian.org/debian\n\" | sudo tee /etc/apt/sources.list.d/debian.sources > /dev/null",
-        "printf \"Components: main contrib non-free non-free-firmware\nEnabled: yes\nX-Repolib-Name: debian-security\nSigned-By: /usr/share/keyrings/debian-archive-keyring.gpg\nSuites: bookworm-security\nTypes: deb\nURIs: http://deb.debian.org/debian-security\n\" | sudo tee /etc/apt/sources.list.d/debian-security.sources > /dev/null"
-      ],
-      "type": "shell"
-    },
-    {
-      "inline": [
-        "set -eu",
         "sudo apt update",
         "sudo DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y",
         "sudo DEBIAN_FRONTEND=noninteractive apt-get install -y ca-certificates curl gcc hostname iproute2 locales locales-all python3 sudo",
@@ -113,6 +103,16 @@
         "sudo mount -o loop VBoxGuestAdditions.iso /mnt",
         "(echo 'y' | sudo sh /mnt/VBoxLinuxAdditions.run) || echo $?",
         "sudo umount /mnt"
+      ],
+      "type": "shell"
+    },
+    {
+      "inline": [
+        "set -eu",
+        "sudo rm -rf /etc/apt/sources.list*",
+        "sudo mkdir -p /etc/apt/sources.list.d",
+        "printf \"Components: main contrib non-free non-free-firmware\nEnabled: yes\nX-Repolib-Name: debian\nSigned-By: /usr/share/keyrings/debian-archive-keyring.gpg\nSuites: bookworm bookworm-updates\nTypes: deb\nURIs: http://deb.debian.org/debian\n\" | sudo tee /etc/apt/sources.list.d/debian.sources > /dev/null",
+        "printf \"Components: main contrib non-free non-free-firmware\nEnabled: yes\nX-Repolib-Name: debian-security\nSigned-By: /usr/share/keyrings/debian-archive-keyring.gpg\nSuites: bookworm-security\nTypes: deb\nURIs: http://deb.debian.org/debian-security\n\" | sudo tee /etc/apt/sources.list.d/debian-security.sources > /dev/null"
       ],
       "type": "shell"
     },

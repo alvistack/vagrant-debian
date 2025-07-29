@@ -93,16 +93,6 @@
     }
   ],
   "provisioners": [
-    { 
-      "inline": [
-        "set -eu",
-        "sudo rm -rf /etc/apt/sources.list*",
-        "sudo mkdir -p /etc/apt/sources.list.d",
-        "printf \"Components: main contrib non-free non-free-firmware\nEnabled: yes\nX-Repolib-Name: debian\nSigned-By: /usr/share/keyrings/debian-archive-keyring.gpg\nSuites: testing testing-updates\nTypes: deb\nURIs: https://deb.debian.org/debian\n\" | sudo tee /etc/apt/sources.list.d/debian.sources > /dev/null",
-        "printf \"Components: main contrib non-free non-free-firmware\nEnabled: yes\nX-Repolib-Name: debian-security\nSigned-By: /usr/share/keyrings/debian-archive-keyring.gpg\nSuites: testing-security\nTypes: deb\nURIs: https://deb.debian.org/debian-security\n\" | sudo tee /etc/apt/sources.list.d/debian-security.sources > /dev/null"
-      ],
-      "type": "shell"
-    },
     {
       "inline": [
         "set -eu",
@@ -113,6 +103,16 @@
         "sudo mount -o loop VBoxGuestAdditions.iso /mnt",
         "(echo 'y' | sudo sh /mnt/VBoxLinuxAdditions.run) || echo $?",
         "sudo umount /mnt"
+      ],
+      "type": "shell"
+    },
+    {
+      "inline": [
+        "set -eu",
+        "sudo rm -rf /etc/apt/sources.list*",
+        "sudo mkdir -p /etc/apt/sources.list.d",
+        "printf \"Components: main contrib non-free non-free-firmware\nEnabled: yes\nX-Repolib-Name: debian\nSigned-By: /usr/share/keyrings/debian-archive-keyring.gpg\nSuites: testing testing-updates\nTypes: deb\nURIs: https://deb.debian.org/debian\n\" | sudo tee /etc/apt/sources.list.d/debian.sources > /dev/null",
+        "printf \"Components: main contrib non-free non-free-firmware\nEnabled: yes\nX-Repolib-Name: debian-security\nSigned-By: /usr/share/keyrings/debian-archive-keyring.gpg\nSuites: testing-security\nTypes: deb\nURIs: https://deb.debian.org/debian-security\n\" | sudo tee /etc/apt/sources.list.d/debian-security.sources > /dev/null"
       ],
       "type": "shell"
     },
