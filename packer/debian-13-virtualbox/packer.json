@@ -33,8 +33,8 @@
       "guest_os_type": "Debian_64",
       "headless": true,
       "http_directory": "./",
-      "iso_checksum": "30ca12a15cae6a1033e03ad59eb7f66a6d5a258dcf27acd115c2bd42d22640e8",
-      "iso_url": "http://chuangtzu.ftp.acc.umu.se/mirror/cdimage/archive/12.11.0/amd64/iso-cd/debian-12.11.0-amd64-netinst.iso",
+      "iso_checksum": "e363cae0f1f22ed73363d0bde50b4ca582cb2816185cf6eac28e93d9bb9e1504",
+      "iso_url": "http://gemmei.ftp.acc.umu.se/debian-cd/current/amd64/iso-cd/debian-13.0.0-amd64-netinst.iso",
       "memory": 16384,
       "shutdown_command": "sudo shutdown -h now",
       "ssh_password": "vagrant",
@@ -111,8 +111,8 @@
         "set -eu",
         "sudo rm -rf /etc/apt/sources.list*",
         "sudo mkdir -p /etc/apt/sources.list.d",
-        "printf \"Components: main contrib non-free non-free-firmware\nEnabled: yes\nX-Repolib-Name: debian\nSigned-By: /usr/share/keyrings/debian-archive-keyring.gpg\nSuites: bookworm bookworm-updates\nTypes: deb\nURIs: http://deb.debian.org/debian\n\" | sudo tee /etc/apt/sources.list.d/debian.sources > /dev/null",
-        "printf \"Components: main contrib non-free non-free-firmware\nEnabled: yes\nX-Repolib-Name: debian-security\nSigned-By: /usr/share/keyrings/debian-archive-keyring.gpg\nSuites: bookworm-security\nTypes: deb\nURIs: http://deb.debian.org/debian-security\n\" | sudo tee /etc/apt/sources.list.d/debian-security.sources > /dev/null"
+        "printf \"Components: main contrib non-free non-free-firmware\nEnabled: yes\nX-Repolib-Name: debian\nSigned-By: /usr/share/keyrings/debian-archive-keyring.gpg\nSuites: trixie trixie-updates\nTypes: deb\nURIs: http://deb.debian.org/debian\n\" | sudo tee /etc/apt/sources.list.d/debian.sources > /dev/null",
+        "printf \"Components: main contrib non-free non-free-firmware\nEnabled: yes\nX-Repolib-Name: debian-security\nSigned-By: /usr/share/keyrings/debian-archive-keyring.gpg\nSuites: trixie-security\nTypes: deb\nURIs: http://deb.debian.org/debian-security\n\" | sudo tee /etc/apt/sources.list.d/debian-security.sources > /dev/null"
       ],
       "type": "shell"
     },
