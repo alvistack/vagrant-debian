@@ -36,7 +36,7 @@
       "headless": true,
       "http_directory": "./",
       "iso_checksum": "30ca12a15cae6a1033e03ad59eb7f66a6d5a258dcf27acd115c2bd42d22640e8",
-      "iso_url": "http://gemmei.ftp.acc.umu.se/debian-cd/current/amd64/iso-cd/debian-12.11.0-amd64-netinst.iso",
+      "iso_url": "http://chuangtzu.ftp.acc.umu.se/mirror/cdimage/archive/12.11.0/amd64/iso-cd/debian-12.11.0-amd64-netinst.iso",
       "memory": 16384,
       "net_device": "virtio-net",
       "qemu_binary": "kvm",

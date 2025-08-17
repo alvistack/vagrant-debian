@@ -1,6 +1,7 @@
 {
   "builders": [
     {
+      "accelerator": "kvm",
       "boot_command": [
         "<esc><esc><esc><esc><esc><esc><esc><esc><esc><esc><wait>",
         "<esc><esc><esc><esc><esc><esc><esc><esc><esc><esc><wait>",
@@ -26,60 +27,49 @@
       ],
       "boot_wait": "1s",
       "cpus": 2,
-      "disk_size": 131072,
-      "gfx_accelerate_3d": false,
-      "gfx_controller": "vboxsvga",
-      "guest_additions_mode": "upload",
-      "guest_os_type": "Debian_64",
+      "disk_cache": "writeback",
+      "disk_compression": true,
+      "disk_image": false,
+      "disk_interface": "virtio",
+      "disk_size": "131072M",
+      "format": "qcow2",
       "headless": true,
       "http_directory": "./",
-      "iso_checksum": "30ca12a15cae6a1033e03ad59eb7f66a6d5a258dcf27acd115c2bd42d22640e8",
-      "iso_url": "http://chuangtzu.ftp.acc.umu.se/mirror/cdimage/archive/12.11.0/amd64/iso-cd/debian-12.11.0-amd64-netinst.iso",
+      "iso_checksum": "e363cae0f1f22ed73363d0bde50b4ca582cb2816185cf6eac28e93d9bb9e1504",
+      "iso_url": "http://gemmei.ftp.acc.umu.se/debian-cd/current/amd64/iso-cd/debian-13.0.0-amd64-netinst.iso",
       "memory": 16384,
+      "net_device": "virtio-net",
+      "qemu_binary": "kvm",
+      "qemuargs": [
+        [
+          "-cpu",
+          "host"
+        ]
+      ],
       "shutdown_command": "sudo shutdown -h now",
       "ssh_password": "vagrant",
       "ssh_port": 22,
       "ssh_read_write_timeout": "600s",
       "ssh_timeout": "120m",
       "ssh_username": "vagrant",
-      "type": "virtualbox-iso",
-      "vboxmanage": [
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--cpu-profile",
-          "host"
-        ],
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--nested-hw-virt",
-          "on"
-        ],
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--nat-localhostreachable1",
-          "on"
-        ]
-      ],
-      "vrdp_bind_address": "0.0.0.0",
-      "vrdp_port_max": 6000,
-      "vrdp_port_min": 5900
+      "type": "qemu",
+      "vnc_bind_address": "0.0.0.0",
+      "vnc_port_max": 6000,
+      "vnc_port_min": 5900
     }
   ],
   "post-processors": [
     {
       "inline": [
         "set -eu",
-        "export _IMAGE=\"$(ls -1d output-virtualbox-iso/packer-virtualbox-iso-*.vmdk)\"",
-        "sudo qemu-img convert -f vmdk -O qcow2 \"$_IMAGE\" \"$_IMAGE.convert\"",
+        "export _IMAGE=\"output-qemu/packer-qemu\"",
+        "sudo qemu-img convert -f qcow2 -O qcow2 \"$_IMAGE\" \"$_IMAGE.convert\"",
         "sudo rm -rf \"$_IMAGE\"",
         "sudo chmod a+r /boot/vmlinuz*",
         "sudo virt-customize --no-network -a \"$_IMAGE.convert\" --delete \"/var/lib/*/random-seed\" --delete \"/var/lib/wicked/*\" --firstboot-command \"/usr/local/bin/virt-sysprep-firstboot.sh\"",
         "sudo virt-sysprep --operations defaults,-ssh-userdir,-customize -a \"$_IMAGE.convert\"",
         "sudo virt-sparsify --in-place \"$_IMAGE.convert\"",
-        "sudo qemu-img convert -f qcow2 -O vmdk \"$_IMAGE.convert\" \"$_IMAGE\"",
+        "sudo qemu-img convert -f qcow2 -O qcow2 -c \"$_IMAGE.convert\" \"$_IMAGE\"",
         "sudo rm -rf \"$_IMAGE.convert\""
       ],
       "type": "shell-local"
@@ -88,7 +78,7 @@
       "compression_level": 9,
       "keep_input_artifact": true,
       "output": "output-vagrant/package.box",
-      "provider_override": "virtualbox",
+      "provider_override": "libvirt",
       "type": "vagrant"
     }
   ],
@@ -99,10 +89,7 @@
         "sudo apt update",
         "sudo DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y",
         "sudo DEBIAN_FRONTEND=noninteractive apt-get install -y ca-certificates curl gcc hostname iproute2 locales locales-all python3 sudo",
-        "sudo DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential dkms",
-        "sudo mount -o loop VBoxGuestAdditions.iso /mnt",
-        "(echo 'y' | sudo sh /mnt/VBoxLinuxAdditions.run) || echo $?",
-        "sudo umount /mnt"
+        "sudo DEBIAN_FRONTEND=noninteractive apt-get install -y qemu-guest-agent"
       ],
       "type": "shell"
     },
@@ -111,8 +98,8 @@
         "set -eu",
         "sudo rm -rf /etc/apt/sources.list*",
         "sudo mkdir -p /etc/apt/sources.list.d",
-        "printf \"Components: main contrib non-free non-free-firmware\nEnabled: yes\nX-Repolib-Name: debian\nSigned-By: /usr/share/keyrings/debian-archive-keyring.gpg\nSuites: bookworm bookworm-updates\nTypes: deb\nURIs: http://deb.debian.org/debian\n\" | sudo tee /etc/apt/sources.list.d/debian.sources > /dev/null",
-        "printf \"Components: main contrib non-free non-free-firmware\nEnabled: yes\nX-Repolib-Name: debian-security\nSigned-By: /usr/share/keyrings/debian-archive-keyring.gpg\nSuites: bookworm-security\nTypes: deb\nURIs: http://deb.debian.org/debian-security\n\" | sudo tee /etc/apt/sources.list.d/debian-security.sources > /dev/null"
+        "printf \"Components: main contrib non-free non-free-firmware\nEnabled: yes\nX-Repolib-Name: debian\nSigned-By: /usr/share/keyrings/debian-archive-keyring.gpg\nSuites: trixie trixie-updates\nTypes: deb\nURIs: http://deb.debian.org/debian\n\" | sudo tee /etc/apt/sources.list.d/debian.sources > /dev/null",
+        "printf \"Components: main contrib non-free non-free-firmware\nEnabled: yes\nX-Repolib-Name: debian-security\nSigned-By: /usr/share/keyrings/debian-archive-keyring.gpg\nSuites: trixie-security\nTypes: deb\nURIs: http://deb.debian.org/debian-security\n\" | sudo tee /etc/apt/sources.list.d/debian-security.sources > /dev/null"
       ],
       "type": "shell"
     },
